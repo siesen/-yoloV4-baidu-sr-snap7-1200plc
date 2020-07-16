@@ -1,4 +1,4 @@
-## YOLOV4：You Only Look Once目标检测模型在Tensorflow2当中的实现
+# YOLOV4：You Only Look Once目标检测模型在Tensorflow2当中的实现，加入百度语音识别，通过snap7控制西门子1200PLC
 ---
 
 ### 目录
@@ -9,19 +9,25 @@
 5. [训练步骤 How2train](#训练步骤)
 6. [参考资料 Reference](#Reference)
 
-### YOLOV4的改进
-- [x] 主干特征提取网络：DarkNet53 => CSPDarkNet53
-- [x] 特征金字塔：SPP，PAN
-- [x] 训练用到的小技巧：Mosaic数据增强、Label Smoothing平滑、CIOU、学习率余弦退火衰减
-- [x] 激活函数：使用Mish激活函数
-- [ ] ……balabla
+### 概述
+目标检测YOLOV4框架源码源自https://github.com/bubbliiiing/yolov4-tf2，yoloV4源码详解UP主B站有视频
+语音识别源自baidu，语义分类为全连接网络
+使用snap7连接西门子1200plc
 
 ### 所需环境
-tensorflow-gpu==2.2.0  
+python==3.7
+tensorflow-gpu==2.2.0
+pyaudio==0.2.11
+baidu-aip==2.2.18.0
+jieba==0.42.1
+python-snap7==0.11
+opencv==4.2.0
 
 ### 注意事项
-代码中的yolo4_weights.h5是基于608x608的图片训练的，但是由于显存原因。我将代码中的图片大小修改成了416x416。有需要的可以修改回来。 代码中的默认anchors是基于608x608的图片的。**这个库里面的h5和Keras的h5不同，不要混用。**  
-**视频中说的速度慢问题已经解决了很多，现在train.py和train_eager.py速度差距不大，如果还有改进速度的地方可以私信告诉我!**  
+**yoloV4和nlp处理有两个神经网络，keras载入有报错。我采用了折衷的方法，nlp预测模型时报错就重新载入模型，这样避免了报错，但损失了效率。有好的方法请告诉我** 
+**camera.py把yoloV4预测放在主线程，没有问题。camera1.py把yoloV4预测放在子线程，运行时会报错，应该还是两个网络模型载入的问题，有解决方式请告诉我**
+**语音识别本想使用sphinx，但无论英文还是中文，识别率很低，所以换成了baidu语音识别。如果知道如何训练和改进sphinx模型，请告诉我。**
+**才学python半年，代码有改进和提高的地方请告诉我哈，感谢赐教!**  
 
 ### 小技巧的设置
 在train.py和train_eager.py文件下：   
@@ -33,10 +39,13 @@ tensorflow-gpu==2.2.0
 1、regularization参数可用于控制是否实现正则化损失。  
 
 ### 文件下载
-训练所需的yolo4_weights.h5可在百度网盘中下载。  
-链接: https://pan.baidu.com/s/1DNv71lDkeWff2BmnVpgHeg 提取码: myz8  
+相关文件链接在 文件链接.txt中
+init-loss8.4.h5是本案例检测硬币，发夹，玩具的权重
 yolo4_weights.h5是coco数据集的权重。  
 yolo4_voc_weights.h5是voc数据集的权重。
+video文件夹是用于生成训练图片的视频文件，也可以用来做预测用
+train_images是分解后的训练图片
+train_nlp是训练语音识别的文本文件
 
 ### 训练步骤
 1、本文使用VOC格式进行训练。  
@@ -50,13 +59,10 @@ classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat"
 6、就会生成对应的2007_train.txt，每一行对应其图片位置及其真实框的位置。  
 7、在训练前需要修改model_data里面的voc_classes.txt文件，需要将classes改成你自己的classes。  
 8、运行train.py即可开始训练。
-
-### mAP目标检测精度计算更新
-更新了get_gt_txt.py、get_dr_txt.py和get_map.py文件。  
-get_map文件克隆自https://github.com/Cartucho/mAP  
-具体mAP计算过程可参考：https://www.bilibili.com/video/BV1zE411u7Vw
+训练过程可以参考原UP主
 
 ### Reference
+https://github.com/bubbliiiing/yolov4-tf2
 https://github.com/qqwweee/keras-yolo3/  
 https://github.com/Cartucho/mAP  
 https://github.com/Ma-Dan/keras-yolo4  
