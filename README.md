@@ -10,7 +10,8 @@
 6. [参考资料 Reference](#Reference)
 
 ### 概述
-目标检测YOLOV4框架源码源自https://github.com/bubbliiiing/yolov4-tf2，yoloV4源码详解UP主B站有视频
+目标检测YOLOV4框架源码源自https://github.com/bubbliiiing/yolov4-tf2
+yoloV4源码详解UP主B站有视频
 语音识别源自baidu，语义分类为全连接网络
 使用snap7连接西门子1200plc
 
