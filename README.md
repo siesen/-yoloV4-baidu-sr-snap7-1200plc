@@ -15,6 +15,7 @@
 yoloV4源码详解UP主B站有视频
 语音识别源自baidu，语义分类为全连接网络
 使用snap7连接西门子1200plc
+视频地址：https://www.bilibili.com/video/BV1yK411J7Zc
 
 ### 所需环境
 python==3.7
