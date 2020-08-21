@@ -10,14 +10,11 @@
 6. [参考资料 Reference](#Reference)
 
 ### 概述
-检测三个分类，硬币，发夹，玩具
-语音识别源自baidu，语义分类为全连接网络
-使用snap7连接西门子1200plc
-
-目标检测YOLOV4框架源码源自https://github.com/bubbliiiing/yolov4-tf2
-yoloV4源码详解UP主B站有视频
-
-视频地址：https://www.bilibili.com/video/BV1yK411J7Zc
+检测三个分类，硬币，发夹，玩具。  
+语音识别源自baidu，语义分类为全连接网络。  
+使用snap7连接西门子1200plc。  
+目标检测YOLOV4框架源码源自 https://github.com/bubbliiiing/yolov4-tf2   
+yoloV4源码详解UP主B站有视频 地址：https://www.bilibili.com/video/BV1yK411J7Zc
 
 ### 所需环境
 python==3.7
@@ -48,11 +45,11 @@ opencv==4.2.0
 
 ### 文件下载
 相关文件链接在 文件链接.txt中
-init-loss8.4.h5是本案例检测硬币，发夹，玩具的权重
+init-loss8.4.h5是本案例检测硬币，发夹，玩具的权重  
 yolo4_weights.h5是coco数据集的权重。  
-yolo4_voc_weights.h5是voc数据集的权重。
-video文件夹是用于生成训练图片的视频文件，也可以用来做预测用
-train_images是分解后的训练图片
+yolo4_voc_weights.h5是voc数据集的权重。  
+video文件夹是用于生成训练图片的视频文件，也可以用来做预测用  
+train_images是分解后的训练图片  
 train_nlp是训练语音识别的文本文件
 
 ### 训练步骤
@@ -70,7 +67,7 @@ classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat"
 训练过程可以参考原UP主
 
 ### Reference
-https://github.com/bubbliiiing/yolov4-tf2
+https://github.com/bubbliiiing/yolov4-tf2  
 https://github.com/qqwweee/keras-yolo3/  
 https://github.com/Cartucho/mAP  
 https://github.com/Ma-Dan/keras-yolo4  
